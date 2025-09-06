@@ -19,6 +19,18 @@ model User {
   name      String?
   email     String   @unique
   password  String
+  task Task[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Task{
+  id String @id @default(cuid())
+  title String
+  details String
+  isCompleted Boolean @default(false)
+  isStarred Boolean @default(false)
+  addedById String
+  addedBy User @relation(fields: [addedById],references: [id],onDelete: Cascade)
+ 
 }
